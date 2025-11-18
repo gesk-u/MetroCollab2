@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+
+{% block title %}Student Form - MetroCollab{% endblock %}
+
+{% block main %}
+<div class="main-container">
+    <form action="{{ url_for('student_form', user_id=session['user_id']) }}" method="POST" id="skillForm">
+        <p><strong>Email:</strong></p>
+        <input type="text" name="email" autocomplete="off" placeholder="Email" required>
+        <p><strong>What technical skills do you have?</strong></p>
+        <label><input type="checkbox" name="skill_options" value="python">Python</label><br>
+        <label><input type="checkbox" name="skill_options" value="javaScript/Web Development">JavaScript/Web Development</label><br>
+        <label><input type="checkbox" name="skill_options" value="data Analysis">Data Analysis</label><br>
+        <label><input type="checkbox" name="skill_options" value="UI/UX Design">UI/UX Design</label><br>
+        <label><input type="checkbox" name="skill_options" value="mobile Development">Mobile Development</label><br>
+        <label><input type="checkbox" name="skill_options" value="database/SQL">Database/SQL</label><br>
+        <label><input type="checkbox" name="skill_options" value="machine Learning/AI">Machine Learning/AI</label><br>
+        <label><input type="checkbox" name="skill_options" value="project Management">Project Management</label><br>
+        <label><input type="checkbox" name="skill_options" value="technical Writing">Technical Writing</label><br>
+        <label>
+            <input type="checkbox" id="otherCheckbox" name="otherSkill" value="other">
+            Other:
+        </label>
+            <input type="text" id="otherText" name="otherText" disabled placeholder="Please specify">
+
+
+        <p><strong>What type of projects interest you most? (Select up to 3)</strong></p>
+
+
+        <label><input type="checkbox" name="project_interest" value="Web/Mobile Applications"> Web/Mobile Applications</label><br>
+        <label><input type="checkbox" name="project_interest" value="AI/Machine Learning"> AI/Machine Learning</label><br>
+        <label><input type="checkbox" name="project_interest" value="Data Analysis/Visualization"> Data Analysis/Visualization</label><br>
+        <label><input type="checkbox" name="project_interest" value="IoT/Hardware Projects"> IoT/Hardware Projects</label><br>
+        <label><input type="checkbox" name="project_interest" value="Game Development"> Game Development</label><br>
+        <label><input type="checkbox" name="project_interest" value="Cybersecurity"> Cybersecurity</label><br>
+        <label><input type="checkbox" name="project_interest" value="Social Impact/Sustainability"> Social Impact/Sustainability</label><br>
+        <label><input type="checkbox" name="project_interest" value="Business/Entrepreneurship"> Business/Entrepreneurship</label><br>
+        
+        <label>
+            <input type="checkbox" id="otherProjectCheckbox" name="otherInterest" value="other">
+            Other:
+        </label>
+        <input type="text" id="otherProjectText" name="otherProjectText" disabled placeholder="Please specify">
+
+    
+        <p><strong>When are you typically available to work on projects?</strong><br>
+        Select all that apply:</p>
+
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Morning</th>
+                <th>Afternoon</th>
+                <th>Evening</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Mon</td>
+                <td><input type="checkbox" name="availability_mon" value="morning"></td>
+                <td><input type="checkbox" name="availability_mon" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_mon" value="evening"></td>
+            </tr>
+            <tr>
+                <td>Tue</td>
+                <td><input type="checkbox" name="availability_tue" value="morning"></td>
+                <td><input type="checkbox" name="availability_tue" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_tue" value="evening"></td>
+            </tr>
+            <tr>
+                <td>Wed</td>
+                <td><input type="checkbox" name="availability_wed" value="morning"></td>
+                <td><input type="checkbox" name="availability_wed" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_wed" value="evening"></td>
+            </tr>
+            <tr>
+                <td>Thu</td>
+                <td><input type="checkbox" name="availability_thu" value="morning"></td>
+                <td><input type="checkbox" name="availability_thu" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_thu" value="evening"></td>
+            </tr>
+            <tr>
+                <td>Fri</td>
+                <td><input type="checkbox" name="availability_fri" value="morning"></td>
+                <td><input type="checkbox" name="availability_fri" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_fri" value="evening"></td>
+            </tr>
+            <tr>
+                <td>Weekend</td>
+                <td><input type="checkbox" name="availability_weekend" value="morning"></td>
+                <td><input type="checkbox" name="availability_weekend" value="afternoon"></td>
+                <td><input type="checkbox" name="availability_weekend" value="evening"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <p><strong>Hours per week you can commit:</strong></p>
+        <label><input type="radio" name="hours_per_week" value="5-10"> 5-10 hours</label>
+        <label><input type="radio" name="hours_per_week" value="10-15"> 10-15 hours</label>
+        <label><input type="radio" name="hours_per_week" value="15-20"> 15-20 hours</label>
+        <label><input type="radio" name="hours_per_week" value="20+"> 20+ hours</label>
+
+        <br><br>
+        <button type="submit">Submit</button>
+
+
+    </form>
+</div>
+
+{% endblock %}

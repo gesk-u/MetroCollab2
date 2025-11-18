@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+
+{% block title %}Role Selection - MetroCollab{% endblock %}
+
+{% block main %}
+<div class="main-container" id="selectionScreen">
+    <h2>Who are you?</h2>
+    
+    <form action="/" method="post" onsubmit="handleSubmit(event)">
+        <!-- Name Input Fields -->
+        <div class="index-f-c">
+            <input
+                id="username" 
+                autocomplete="off" 
+                class="form" 
+                name="username" 
+                placeholder="Name" 
+                type="text"
+                required>
+            <input 
+                id="userlastname"
+                autocomplete="off" 
+                class="form" 
+                name="userlastname" 
+                placeholder="Last Name" 
+                type="text"
+                required>
+        </div>
+        
+        <!-- Role Selection Container - SCALED TO 45% -->
+        <div class="selection-container">
+            <p class="subtitle">Choose your role to get started</p>
+            
+            <!-- Hidden input to store selected role -->
+            <input type="hidden" name="role" id="selectedRole" value="">
+            
+            <!-- Role Options -->
+            <div class="role-options">
+                <!-- Student Option -->
+                <div class="role-option" data-role="student" onclick="selectRole(this, 'student')">
+                    <svg class="hand-drawn-oval" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+                        <path class="oval-path" d="
+                            M 120,10
+                            C 180,12 225,45 230,100
+                            C 228,155 182,188 120,190
+                            C 58,188 12,153 10,100
+                            C 13,47 62,11 120,10
+                            C 122,10 120,10 120,10
+                        "/>
+                    </svg>
+                    <div class="role-button">
+                        <div class="role-icon">🎓</div>
+                        <div class="role-title">Student</div>
+                        <div class="role-description">Find your perfect team</div>
+                    </div>
+                </div>
+
+                <!-- Teacher Option -->
+                <div class="role-option" data-role="teacher" onclick="selectRole(this, 'teacher')">
+                    <svg class="hand-drawn-oval" viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg">
+                        <path class="oval-path" d="
+                            M 118,10
+                            C 178,11 227,44 231,100
+                            C 229,154 183,189 121,190
+                            C 59,189 11,155 9,100
+                            C 11,46 60,12 118,10
+                            C 120,10 118,10 118,10
+                        "/>
+                    </svg>
+                    <div class="role-button">
+                        <div class="role-icon">👨‍🏫</div>
+                        <div class="role-title">Teacher</div>
+                        <div class="role-description">Manage student teams</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Continue Button -->
+            <button type="submit" class="continue-button" id="continueBtn">
+                Continue →
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="main-container">
+
+    <div class="dashboard-container" id="studentDashboard" style="display: none;">
+        <form action="/" method="post">
+            <div class="student-center">
+                <div class="dashboard-header">
+                    <h1>Welcome, <span id="studentName"></span>!</h1>
+                    <p class="dashboard-subtitle">Let's find your perfect project team</p>
+                    <p class="subtitle">Please enter the number that you received from your teacher</p>
+                    
+                    <label for="st_code" class="sr-only">Enter your code: </label>
+                    <input
+                        id="st_code"
+                        autocomplete="off"
+                        class="form"
+                        name="st_code"
+                        placeholder="Code"
+                        type="text"
+                        required
+                        minlength="4"
+                        maxlength="4">
+                </div>
+            
+
+                <button type="submit" class="student-button" id="studentBtn">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="dashboard-container" id="teacherDashboard" style="display: none;">
+        <form action="/" method="post">
+            <div class="main-container" id="teacherDashboard">
+
+                <div class="dashboard-header">
+                    <h1>Welcome, <span id="teacherName"></span>! </h1>
+                    <p class="dashboard-subtitle">Answer a couple questions to create a form for students</p>
+                </div>
+
+                <div class="teacher-form">
+                    <label for="total_number">Total number of students:</label>
+                    <input s
+                        id="total_number"
+                        name="total_number"
+                        class="form"
+                        type="number"
+                        min="1"
+                        placeholder="Total number of students"
+                        required>
+
+                    <label for="group_number">Number of students per group:</label>
+                    <input 
+                        id="group_number"
+                        name="group_number"
+                        class="form"
+                        type="number"
+                        min="1"
+                        placeholder="Group size"
+                        required>
+                </div>
+
+                <button type="submit" class="teacher-button" id="teacherBtn">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
