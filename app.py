@@ -159,17 +159,9 @@ def student_form(user_id):
 
         email = request.form.get("email")
 
-        form_skills = request.form.getlist("skill_options")
-        other_skill_checked = request.form.get("otherSkill")
-        other_skill_text = request.form.get('otherText')
-        if other_skill_checked and other_skill_text:
-            form_skills.append(other_skill_text)
+        form_skills = request.form.getlist("skill")
 
-        form_interests = request.form.getlist("project_interest")
-        other_interests_checked = request.form.get("otherInterest")
-        other_interests_text = request.form.get("otherProjectText")
-        if other_interests_checked and other_interests_text:
-            form_interests.append(other_interests_text)
+        form_interests = request.form.getlist("interests")
 
         availability = {
             "mon": request.form.getlist("availability_mon"),
@@ -184,16 +176,17 @@ def student_form(user_id):
 
         db = get_db()
         db.execute("""
-        INSERT INTO student_form (student_id, email, skills, interests, availability, hours_per_week)
-        VALUES (%s, %s, %s, %s, %s, %s)
-        """, (
-            user_id,
-            email, 
-            json.dumps(form_skills), 
-            json.dumps(form_interests), 
-            json.dumps(availability),
-            json.dumps(hours_per_week)
-        ))
+        INSERT INTO skills name VALUE %s
+        """, form_skills)
+        skill_id = db.lastrowid
+        db.execute("""
+        INSERT INTO student_skills user_id, skill_id VALUE %s
+        """, user_id, skill_id)
+        db.execute("""
+        INSERT INTO interests name VALUE %s
+        """, form_interests)
+
+
 
 
 
