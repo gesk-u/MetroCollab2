@@ -1,11 +1,12 @@
 from flask import Flask, render_template, request, flash, session, jsonify, redirect, g, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
+#from dotenv import load_dotenv
 import os
 import mysql.connector
 import secrets
 import string
-
-
+import ai_micro
+import json
 
 # Create the Flask app instance
 app = Flask(__name__)
@@ -27,6 +28,7 @@ def get_db():
             database=DATABASE,
             autocommit=True
         )
+
         g.conn = conn
         g.db = conn.cursor(dictionary=True)
     return g.db
@@ -159,9 +161,9 @@ def student_form(user_id):
 
         email = request.form.get("email")
 
-        form_skills = request.form.getlist("skill")
+        form_skills = request.form.get("skill")
 
-        form_interests = request.form.getlist("interests")
+        form_interests = request.form.get("interests")
 
         availability = {
             "mon": request.form.getlist("availability_mon"),
@@ -175,24 +177,35 @@ def student_form(user_id):
         hours_per_week = request.form.get('hours_per_week')
 
         db = get_db()
+
         db.execute("""
-        INSERT INTO skills name VALUE %s
-        """, form_skills)
+        INSERT INTO skills (name) VALUES (%s)
+        """, (form_skills,))
         skill_id = db.lastrowid
         db.execute("""
-        INSERT INTO student_skills user_id, skill_id VALUE %s
-        """, user_id, skill_id)
+        INSERT INTO student_skills (user_id, skill_id) VALUES (%s, %s)
+        """, (user_id, skill_id))
         db.execute("""
-        INSERT INTO interests name VALUE %s
-        """, form_interests)
+        INSERT INTO interests (name) VALUES (%s)
+        """, (form_interests,))
+        interests_id = db.lastrowid
+        db.execute("""
+        INSERT INTO student_interests (user_id, interest_id) VALUES (%s, %s)
+        """, (user_id, interests_id))
 
+        inter_skills_json = ai_micro.get_ai_json(form_skills, form_interests)
+        interests_json = json.dumps(inter_skills_json["interests"])
+        skills_json = json.dumps(inter_skills_json["skills"])
+        availability_json = json.dumps(availability)
+        hours_per_week_json = json.dumps(hours_per_week)
 
+        db.execute("""
+            INSERT INTO student_form (student_id, email, skills, interests, availability, hours_per_week)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        """, (user_id, email, skills_json, interests_json, availability_json, hours_per_week_json))
 
+        print("Form submitted successfully")
 
-
-
-
-    
     return render_template("student_form.html", user=session['user_id'])
 
 
