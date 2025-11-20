@@ -106,6 +106,6 @@ DO NOT include explanations, markdown, or any text outside the JSON object.
   data = json.loads(response_text)
   return data
 
-
+#TODO add error handling
 
 
