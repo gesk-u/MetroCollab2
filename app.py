@@ -7,6 +7,7 @@ import secrets
 import string
 import ai_micro
 import json
+import jinja2
 
 # Create the Flask app instance
 app = Flask(__name__)
@@ -202,11 +203,26 @@ def student_form(user_id):
         db.execute("""
             INSERT INTO student_form (student_id, email, skills, interests, availability, hours_per_week)
             VALUES (%s, %s, %s, %s, %s, %s)
-        """, (user_id, email, skills_json, interests_json, availability_json, hours_per_week_json))
+        """, (user_id, email, skills_json, interests_json, availability_json, hours_per_week_json))              #TODO if availability empty - delete it from the row
 
         print("Form submitted successfully")
+        return jsonify({"success": True, "message": "Form submitted successfully"})
 
     return render_template("student_form.html", user=session['user_id'])
+
+
+@app.route("/api/check_submission/<int:user_id>")
+def check_submission(user_id):
+    db = get_db()
+    cursor = db.execute("""
+        SELECT COUNT(*) FROM student_form WHERE student_id = %s
+    """, (user_id,))
+    
+    count = cursor.fetchone()[0]
+    has_submitted = count > 0
+    
+    return jsonify({"has_submitted": has_submitted})
+
 
 
 @app.route("/teacher/<int:user_id>", methods=["GET", "POST"])
