@@ -400,3 +400,50 @@ td:first-child {
 label {
     margin-right: 15px;
 }
+
+
+
+
+button:active:not(:disabled) {
+            transform: translateY(0);
+}
+
+button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+}
+
+
+.loader {
+  width: 120px;
+  height: 20px;
+  border-radius: 20px;
+  background:
+   linear-gradient(orange 0 0) 0/0% no-repeat
+   lightblue;
+  animation: l2 2s infinite steps(10);
+  margin: 0 auto 30px;
+}
+@keyframes l2 {
+    100% {background-size:110%}
+}
+
+.loading-text {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.loading-screen {
+    display: none;
+    text-align: center;
+}
+
+.loading-screen.active {
+    display: block;
+}
+
+.form-content.hidden {
+    display: none;
+}

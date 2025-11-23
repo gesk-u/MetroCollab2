@@ -97,25 +97,67 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-const otherCheckbox = document.getElementById('otherCheckbox');
-const otherText = document.getElementById('otherText');
-const form = document.getElementById('skillForm');
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('skillForm');
+    console.log(form)
+    if (form) {
+        const formContent = document.getElementById('student-form-content');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const submitBtn = document.getElementById('student_form_btn');
 
-otherCheckbox.addEventListener("change", () => {
-    if (otherCheckbox.checked) {
-        otherText.disabled = false;
-        otherText.focus();
-    }
-    else {
-        otherText.disabled = true;
-        otherText.value = "";
-    }
-});
+        form.addEventListener('submit', function(e){
+            e.preventDefault()
+            console.log("3")
 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      // You can add more conditions here if needed, e.g. check if username and lastname are filled
-      e.preventDefault(); // prevent default Enter key behavior like form submit or newlines
-      form.submit();
+            submitBtn.disabled = true;
+
+            formContent.classList.add('hidden');
+            loadingScreen.classList.add('active');
+
+            // Get form data
+            const formData = new FormData(form);
+            const userId = form.dataset.userId;
+            console.log("4")
+            console.log(userId)
+
+            fetch(`/student_form/${userId}`, {
+                method: 'POST',
+                body: formData
+            })
+
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                return response.json();
+
+            })
+
+            .then(data => {
+                setTimeout(() => {
+                    //window.location.href = '/thank-you';
+                    loadingScreen.innerHTML = `
+                        <div style="text-align: center;">
+                            <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
+                            <div style="font-size: 24px; font-weight: 600; color: #22c55e; margin-bottom: 10px;">
+                                Success!
+                            </div>
+                            <p style="color: #64748b;">
+                                In the real app, you'd be redirected to the thank-you page now.
+                            </p>
+                            <button onclick="showForm()" style="margin-top: 20px; width: auto; padding: 10px 30px;">
+                                Try Again
+                            </button>
+                        </div>
+                    `;
+                }, 2000);
+            })
+
+            .catch(error => {
+                console.error('Error:', error);
+                showError('An error occurred while submitting the form. Please try again.');
+            });
+        });
     }
 });
