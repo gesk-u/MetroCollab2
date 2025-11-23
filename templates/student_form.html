@@ -4,85 +4,100 @@
 
 {% block main %}
 <div class="main-container">
-    <form action="{{ url_for('student_form', user_id=session['user_id']) }}" method="POST" id="skillForm">
-        <p><strong>Email:</strong></p>
-        <input type="text" name="email" autocomplete="off" placeholder="Email" required>
-        <p><strong>What technical skills do you have?</strong></p>
-        <label>
-            <input type="text" id="skill" name="skill" placeholder="Skills" autocomplete="off" required>
-        </label>
-        <p><strong>What type of projects interest you most? (Select up to 3)</strong></p>
+    <!-- Error Message -->
+    <div class="error-message" id="errorMessage"></div>
+
+    <!-- Form Content -->
+    <div class="form-content" id="student-form-content">
+        <form action="{{ url_for('student_form', user_id=session['user_id']) }}" method="POST" id="skillForm" data-user-id="{{ session['user_id'] }}">
+
+
+            <p><strong>Email:</strong></p>
+            <input type="text" id="email" name="email" autocomplete="off" placeholder="Email" required>
+            <p><strong>What technical skills do you have?</strong></p>
+            <label>
+                <input type="text" id="skill" name="skill" placeholder="Skills" autocomplete="off" required>
+            </label>
+            <p><strong>What type of projects interest you most? (Select up to 3)</strong></p>
+            
+            <label>
+                <input type="text" id="interests" name="interests" placeholder="interests" autocomplete="off" required>
+            </label>
+
         
-        <label>
-            <input type="text" id="interests" name="interests" placeholder="interests" autocomplete="off" required>
-        </label>
+            <p><strong>When are you typically available to work on projects?</strong><br>
+            Select all that apply:</p>
 
-    
-        <p><strong>When are you typically available to work on projects?</strong><br>
-        Select all that apply:</p>
+            <table>
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Morning</th>
+                    <th>Afternoon</th>
+                    <th>Evening</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Mon</td>
+                    <td><input type="checkbox" name="availability_mon" value="morning"></td>
+                    <td><input type="checkbox" name="availability_mon" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_mon" value="evening"></td>
+                </tr>
+                <tr>
+                    <td>Tue</td>
+                    <td><input type="checkbox" name="availability_tue" value="morning"></td>
+                    <td><input type="checkbox" name="availability_tue" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_tue" value="evening"></td>
+                </tr>
+                <tr>
+                    <td>Wed</td>
+                    <td><input type="checkbox" name="availability_wed" value="morning"></td>
+                    <td><input type="checkbox" name="availability_wed" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_wed" value="evening"></td>
+                </tr>
+                <tr>
+                    <td>Thu</td>
+                    <td><input type="checkbox" name="availability_thu" value="morning"></td>
+                    <td><input type="checkbox" name="availability_thu" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_thu" value="evening"></td>
+                </tr>
+                <tr>
+                    <td>Fri</td>
+                    <td><input type="checkbox" name="availability_fri" value="morning"></td>
+                    <td><input type="checkbox" name="availability_fri" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_fri" value="evening"></td>
+                </tr>
+                <tr>
+                    <td>Weekend</td>
+                    <td><input type="checkbox" name="availability_weekend" value="morning"></td>
+                    <td><input type="checkbox" name="availability_weekend" value="afternoon"></td>
+                    <td><input type="checkbox" name="availability_weekend" value="evening"></td>
+                </tr>
+                </tbody>
+            </table>
 
-        <table>
-            <thead>
-            <tr>
-                <th></th>
-                <th>Morning</th>
-                <th>Afternoon</th>
-                <th>Evening</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Mon</td>
-                <td><input type="checkbox" name="availability_mon" value="morning"></td>
-                <td><input type="checkbox" name="availability_mon" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_mon" value="evening"></td>
-            </tr>
-            <tr>
-                <td>Tue</td>
-                <td><input type="checkbox" name="availability_tue" value="morning"></td>
-                <td><input type="checkbox" name="availability_tue" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_tue" value="evening"></td>
-            </tr>
-            <tr>
-                <td>Wed</td>
-                <td><input type="checkbox" name="availability_wed" value="morning"></td>
-                <td><input type="checkbox" name="availability_wed" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_wed" value="evening"></td>
-            </tr>
-            <tr>
-                <td>Thu</td>
-                <td><input type="checkbox" name="availability_thu" value="morning"></td>
-                <td><input type="checkbox" name="availability_thu" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_thu" value="evening"></td>
-            </tr>
-            <tr>
-                <td>Fri</td>
-                <td><input type="checkbox" name="availability_fri" value="morning"></td>
-                <td><input type="checkbox" name="availability_fri" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_fri" value="evening"></td>
-            </tr>
-            <tr>
-                <td>Weekend</td>
-                <td><input type="checkbox" name="availability_weekend" value="morning"></td>
-                <td><input type="checkbox" name="availability_weekend" value="afternoon"></td>
-                <td><input type="checkbox" name="availability_weekend" value="evening"></td>
-            </tr>
-            </tbody>
-        </table>
+            <br>
 
-        <br>
+            <p><strong>Hours per week you can commit:</strong></p>
+            <label><input type="radio" name="hours_per_week" value="5-10"> 5-10 hours</label>
+            <label><input type="radio" name="hours_per_week" value="10-15"> 10-15 hours</label>
+            <label><input type="radio" name="hours_per_week" value="15-20"> 15-20 hours</label>
+            <label><input type="radio" name="hours_per_week" value="20+"> 20+ hours</label>
 
-        <p><strong>Hours per week you can commit:</strong></p>
-        <label><input type="radio" name="hours_per_week" value="5-10"> 5-10 hours</label>
-        <label><input type="radio" name="hours_per_week" value="10-15"> 10-15 hours</label>
-        <label><input type="radio" name="hours_per_week" value="15-20"> 15-20 hours</label>
-        <label><input type="radio" name="hours_per_week" value="20+"> 20+ hours</label>
-
-        <br><br>
-        <button type="submit">Submit</button>
+            <br><br>
+            <button type="submit" id="student_form_btn">Submit</button>
 
 
-    </form>
+        </form>
+    </div>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Processing your form...</div>
+        <div class="loader"></div>
+    </div>
+
 </div>
+
 
 {% endblock %}
