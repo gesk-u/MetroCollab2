@@ -16,7 +16,7 @@ cd MetroCollab2
 # 2. Install Python dependencies
 pip install -r requirements.txt
 
-# 3. Install Ollama
+# 3. Install Ollama (Might be optional)
 # Download from: https://ollama.com/download
 
 # 4. Add Ollama to PATH
@@ -27,7 +27,7 @@ pip install -r requirements.txt
 # (Use the actual Ollama installation path if you changed the default location)
 # Click OK to save
 
-# 5. Pull the AI model
+# 5. Pull the AI model (Might be optional)
 ollama pull gemma3:4b
 
 # 6. Add MariaDB to PATH
