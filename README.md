@@ -10,8 +10,8 @@ All project dependencies are in a single `requirements.txt` file at the root.
 
 ```bash
 # 1. Clone the repository
-git clone <your-repo-url>
-cd MetroCollab
+git clone https://github.com/gesk-u/MetroCollab2.git
+cd MetroCollab2
 
 # 2. Install Python dependencies
 pip install -r requirements.txt
@@ -19,18 +19,44 @@ pip install -r requirements.txt
 # 3. Install Ollama
 # Download from: https://ollama.com/download
 
-# 4. Pull the AI model
+# 4. Add Ollama to PATH
+# Open Start → type "Environment Variables" → Enter
+# Click "Environment Variables"
+# Under "System variables", find "Path" → Edit
+# Press "New" and paste: C:\Users\atkac\AppData\Local\Ollama
+# (Use the actual Ollama installation path if you changed the default location)
+# Click OK to save
+
+# 5. Pull the AI model
 ollama pull gemma3:4b
 
-# 5. Set up MySQL database
+# 6. Add MariaDB to PATH
+# Open Start → type "Environment Variables" → Enter
+# Click "Environment Variables"
+# Under "System variables", find "Path" → Edit
+# Press "New" and paste your MariaDB bin location
+# Example: C:\Program Files\MariaDB 12.1\bin
+# Click OK to save
+
+# 7. Set up MySQL database
+# Open cmd (Win+R → type "cmd" → Enter)
+# Navigate to your project directory:
+cd path\to\MetroCollab2
+# Run the schema:
 mysql -u root -p < schema.sql
 
-# 6. Create .env file
-echo "SECRET_KEY=your-secret-key-here" > .env
-echo "PASSWORD=your-mysql-password" >> .env
-echo "USER=your-user-name-here" >> .env
+# 8. Create .env file
+echo SECRET_KEY=your-secret-key-here > .env
+echo PASSWORD=your-mysql-password >> .env
+echo USER=your-user-name-here >> .env
 
-# 7. Run the application
+# 9. Verify .env encoding is UTF-8
+# Open the .env file in a text editor
+# Check encoding is UTF-8, change if necessary
+# In VS Code: bottom right corner shows encoding
+# In Notepad: File → Save As → Encoding dropdown → UTF-8
+
+# 10. Run the application
 python app.py
 ```
 
