@@ -28,7 +28,7 @@ mysql -u root -p < schema.sql
 # 6. Create .env file
 echo "SECRET_KEY=your-secret-key-here" > .env
 echo "PASSWORD=your-mysql-password" >> .env
-echo "USER=your-user-name-here" >>> .env
+echo "USER=your-user-name-here" >> .env
 
 # 7. Run the application
 python app.py
