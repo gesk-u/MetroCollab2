@@ -176,5 +176,20 @@ Create these tables in your `Collab_DB` database:
 -  Responsive web interface
 
 ---
+# ===================================
+# TROUBLESHOOTING: If you get connection errors
+# ===================================
+# If you see errors like "ConnectionError" or "Connection refused",
+# uncomment the lines below and use explicit client connection:
+#
+# client = Client(host="http://127.0.0.1:11434")
+# 
+# Then replace all instances of:
+#   chat(model='gemma3:4b', messages=[...])
+# With:
+#   client.chat(model='gemma3:4b', messages=[...])
+#
+# This explicitly tells Ollama where to connect.
+# ===================================
 
 **Note:** Make sure Ollama is running before starting the Flask application!
