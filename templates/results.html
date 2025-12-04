@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Group Assignment Results{% endblock %}
+{% block main %}
+<div class="results-container">
+    <div class="results-header">
+        <h2>Team Assignments</h2>
+        <p class="results-subtitle">AI-powered matching complete!</p>
+    </div>
+
+    {% if group_results %}
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Team Assignment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in group_results %}
+                <tr>
+                    <td>{{ result.user_firstname }} {{ result.user_lastname }}</td>
+                    <td>{{ result.group_number }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="results-actions">
+        <a href="/dashboard" class="secondary-button">Back to Dashboard</a>
+        <button onclick="">Export to Excel</button>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="empty-state-icon">📋</div>
+        <h3>No Results Yet</h3>
+        <p>Complete the team formation process to see results here.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+# ===================================
+# MetroCollab - AI-Powered Student Team Matching System
+# Complete Project Requirements
+# ===================================
+
+# ===================================
+# Core Dependencies
+# ===================================
+
+# Web Framework
+Flask>=3.0.0
+
+# Database
+mysql-connector-python>=8.2.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# ===================================
+# AI & Machine Learning
+# ===================================
+
+# Local LLM Integration (Ollama)
+ollama>=0.1.0
+
+# Natural Language Processing - Word Embeddings
+gensim>=4.3.0
+
+# Scientific Computing
+numpy>=1.24.0
+
+# Machine Learning - Clustering Algorithm
+scikit-learn>=1.3.0
+
+# ===================================
+# Testing & Development
+# ===================================
+
+# Fake Data Generation
+Faker>=20.0.0
+
+# ===================================
+# Installation Instructions
+# ===================================
+# 1. Install Python dependencies:
+#    pip install -r requirements.txt
+#
+# 2. Install Ollama (separate installation):
+#    Download from: https://ollama.com/download
+#
+# 3. Pull required AI model:
+#    ollama pull gemma3:4b
+#
+# 4. Set up MySQL database:
+#    - Install MySQL Server
+#    - Create database: CREATE DATABASE Collab_DB;
+#    - Run schema setup (see database/schema.sql if available)
+#
+# 5. Configure environment variables:
+#    Create a .env file with:
+#    SECRET_KEY=your-secret-key-here
+#    PASSWORD=your-mysql-password
+
+# ===================================
+# System Requirements
+# ===================================
+# - Python 3.8+
+# - MySQL Server 8.0+
+# - 8GB+ RAM (for Ollama model)
+# - ~3GB disk space (for GloVe and Gemma models)
+
+# ===================================
+# First Run Notes
+# ===================================
+# - GloVe model auto-downloads on first use (~128MB)
+# - Gemma3:4b model must be pulled manually (~2.5GB)
+# - Ensure Ollama service is running before starting the app

@@ -120,12 +120,13 @@
 
                 <div class="dashboard-header">
                     <h1>Welcome, <span id="teacherName"></span>! </h1>
-                    <p class="dashboard-subtitle">Answer a couple questions to create a form for students</p>
+                    <p class="dashboard-subtitle">Answer a couple of questions to create a form for students</p>
                 </div>
 
                 <div class="teacher-form">
+
                     <label for="total_number">Total number of students:</label>
-                    <input s
+                    <input
                         id="total_number"
                         name="total_number"
                         class="form"
@@ -134,24 +135,35 @@
                         placeholder="Total number of students"
                         required>
 
-                    <label for="group_number">Number of students per group:</label>
-                    <input 
-                        id="group_number"
-                        name="group_number"
+                    <label for="group_min">Minimum number of students per group:</label>
+                    <input
+                        id="group_min"
+                        name="group_min"
                         class="form"
                         type="number"
                         min="1"
-                        placeholder="Group size"
+                        placeholder="Minimum students per group"
                         required>
+
+                    <label for="group_max">Maximum number of students per group:</label>
+                    <input
+                        id="group_max"
+                        name="group_max"
+                        class="form"
+                        type="number"
+                        min="1"
+                        placeholder="Maximum students per group"
+                        required>
+
+                    <button type="submit" class="teacher-button">
+                        Generate Form
+                    </button>
+
                 </div>
 
-                <button type="submit" class="teacher-button" id="teacherBtn">
-                    Submit
-                </button>
+                
             </div>
         </form>
-
     </div>
 </div>
-
 {% endblock %}

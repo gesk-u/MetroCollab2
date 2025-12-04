@@ -143,11 +143,8 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div style="font-size: 24px; font-weight: 600; color: #22c55e; margin-bottom: 10px;">
                                 Success!
                             </div>
-                            <p style="color: #64748b;">
-                                In the real app, you'd be redirected to the thank-you page now.
-                            </p>
-                            <button onclick="showForm()" style="margin-top: 20px; width: auto; padding: 10px 30px;">
-                                Try Again
+                            <button onclick="window.location.href='/'" style="margin-top: 20px; width: auto; padding: 10px 30px;">
+                                To the main page
                             </button>
                         </div>
                     `;
